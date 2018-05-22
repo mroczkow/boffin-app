@@ -1,0 +1,34 @@
+<div class="container">
+    <div class="row">
+      <div class="col-6">
+        <input class="form-control" type="text" [(ngModel)]="filterString" placeholder="Search in artists">
+      </div>
+
+      <div class="col-6">
+        <button class="btn btn-light" (click)="onGetPredictions()">Get Predictions</button>
+      </div>
+    </div>
+    
+    <ul class="nav nav-tabs">
+      <!-- <li class="nav-item">
+        <a class="nav-link" routerLink="all" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">All</a>
+      </li>
+      <li class="nav-item" *ngFor="let year of years">
+        <a class="nav-link" routerLink={{year}}  routerLinkActive="active">{{year}}</a>
+      </li> -->
+      <li class="nav-item">
+        <a class="nav-link" (click)="onTabSelected()" [ngClass]="{'active': !selectedYear}">All</a>
+      </li>
+      <li class="nav-item" *ngFor="let year of years | async">
+        <a class="nav-link" (click)="onTabSelected(year)" [ngClass]="{'active': selectedYear === year}">{{year}}</a>
+      </li>
+    </ul>
+    
+    <div class="tab-content">
+      <div class="tab-pane container active" >
+        <!-- <router-outlet></router-outlet> -->
+        <app-artists-grid [artists]="artistsToDisplay | async | filter:filterString:'name'"></app-artists-grid>
+      </div>
+    </div>
+</div>
+
