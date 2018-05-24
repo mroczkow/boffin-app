@@ -1,8 +1,6 @@
 body {
-    height: 100%;
-    width: 100%;
-    position: absolute;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    overflow: hidden;
 }
-
-.container-fluid,
-.row-fluid { height: inherit; }
