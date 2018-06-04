@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+
 import { ArtistsService } from './artists.service';
 import { Artist } from './artist';
-import { Observable } from 'rxjs';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-artists-picker',
@@ -9,25 +10,32 @@ import { Observable } from 'rxjs';
   styleUrls: ['./artists-picker.component.css']
 })
 export class ArtistsPickerComponent implements OnInit {
-  selectedYear: string;
-  filterString: string = '';
+  selectedYear = 'All';
+  filterString = '';
+  loaded = false;
+  years: string [];
+  artistsToDisplay: Artist[];
+  artistsData: {};
 
-  years: Observable<string []>;
-  artistsToDisplay: Observable<Artist []>
-
-  constructor(private artistsService: ArtistsService) { }
+  constructor(private artistsService: ArtistsService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
-    this.years = this.artistsService.getYears();
-    this.artistsToDisplay = this.artistsService.getArtistsForYear(this.selectedYear);
+    this.artistsService.getHistoricData().subscribe(data => {
+      this.artistsData = data;
+      this.artistsToDisplay = this.artistsData[this.selectedYear];
+      this.years = Object.keys(data).reverse();
+      this.loaded = true;
+    });
   }
 
-  onTabSelected(year) {
+  onTabSelected(year: string) {
     this.selectedYear = year;
-    this.artistsToDisplay = this.artistsService.getArtistsForYear(this.selectedYear);
+    this.artistsToDisplay = this.artistsData[this.selectedYear];
   }
 
-  onGetPredictions() {
+  onGetRecommendations() {
     console.log(this.artistsService.getSelectedArtists());
+    this.router.navigate(['recommendations']);
+
   }
 }

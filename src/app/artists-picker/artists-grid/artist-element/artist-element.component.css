@@ -1,0 +1,38 @@
+.app-tag-item {
+  margin-right: 3px;
+  margin-bottom: 3px;
+  border: 1px solid transparent;
+  background-color: lightgrey;
+  border-radius: 10px;
+  padding: 2px;
+  font-size: 12px;
+}
+
+.app-artist-element:hover {
+  box-shadow: 0 0 1em lightgrey;
+  cursor: pointer;
+}
+
+.app-artist-element:hover img {
+  opacity: 0.5;
+}
+
+.heart-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  visibility: hidden;
+  font-size: 36px;
+}
+
+.app-artist-element:hover .heart-icon {
+  visibility: visible;
+}
+
+.img-container {
+  position: relative;
+  text-align: center;
+  color: white;
+  background-color: #000000;
+}
