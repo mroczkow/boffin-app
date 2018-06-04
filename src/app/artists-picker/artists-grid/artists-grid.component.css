@@ -1,4 +1,8 @@
 :host {
-    display: flex;
-    overflow-y: scroll
+  display: flex;
+  overflow-y: scroll
+}
+
+.app-grid-element {
+  padding: 10px;
 }

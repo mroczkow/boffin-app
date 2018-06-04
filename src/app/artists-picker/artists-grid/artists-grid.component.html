@@ -1,7 +1,10 @@
 <div class="container-fluid">
   <div class="row">
-    <div class="col-2" *ngFor="let artist of artists">
-      <app-artist-element [artist]="artist" (click)="onArtistSelected(artist)"></app-artist-element>
+    <div class="col-6 col-sm-4 col-md-3 col-lg-2 col-xl-2 app-grid-element" *ngFor="let artist of artists">
+      <app-artist-element
+        [artist]="artist"
+        [imageObserver]="lazyImageObserver"
+        (click)="onArtistSelected(artist)"></app-artist-element>
     </div>
   </div>
 </div>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+
 import { ArtistsService } from '../artists-picker/artists.service';
 import { Artist } from '../artists-picker/artist';
 

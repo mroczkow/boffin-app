@@ -1,9 +1,17 @@
-<div class="card bg-dark text-white">
-  <img class="card-img" src={{artist.imageUrl}} alt="Card image">
-  <div class="card-img-overlay">
+<div class="card app-artist-element">
+  <div class="img-container">
+    <img class="card-img-top lazy"
+         src="../../../assets/placeholder.png"
+         onError="this.onerror = null; this.src = '../../../assets/placeholder.png';"
+         #artistImage
+         alt="{{artist.imageUrl}}"/>
+    <i class="fa fa-heart heart-icon"></i>
+  </div>
+
+  <div class="card-body">
     <h5 class="card-title">{{ artist.name }}</h5>
-    <!-- <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little
-      bit longer.</p>
-    <p class="card-text">Last updated 3 mins ago</p> -->
+    <div class="row">
+      <p class="card-text app-tag-item" *ngFor="let tag of artist.tags">{{tag}}</p>
+    </div>
   </div>
 </div>
