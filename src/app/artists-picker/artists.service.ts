@@ -6,7 +6,7 @@ import { Artist } from './artist';
 
 @Injectable()
 export class ArtistsService {
-  private selectedArtists: Artist[] = [];
+  private selectedArtists: string[] = [];
 
   constructor(private http: HttpClient) {}
 
@@ -21,11 +21,22 @@ export class ArtistsService {
     );
   }
 
-  addSelectedArtist(artist: Artist) {
-    this.selectedArtists.push(artist);
+  addArtistNameToSelected(artistName: string) {
+    if (!this.isSelected(artistName)) {
+      this.selectedArtists.push(artistName);
+    }
   }
 
-  getSelectedArtists(): Artist[] {
+  removeArtistFromSelected(artistName: string) {
+    const artistIndex = this.selectedArtists.indexOf(artistName);
+    this.selectedArtists.splice(artistIndex, 1);
+  }
+
+  isSelected(artistName: string) {
+    return this.selectedArtists.indexOf(artistName) !== -1;
+  }
+
+  getSelectedArtists(): string[] {
     return this.selectedArtists;
   }
 

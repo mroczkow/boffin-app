@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { ArtistsService } from './artists.service';
 import { Artist } from './artist';
-import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-artists-picker',
@@ -17,7 +17,7 @@ export class ArtistsPickerComponent implements OnInit {
   artistsToDisplay: Artist[];
   artistsData: {};
 
-  constructor(private artistsService: ArtistsService, private route: ActivatedRoute, private router: Router) { }
+  constructor(private artistsService: ArtistsService, private router: Router) { }
 
   ngOnInit() {
     this.artistsService.getHistoricData().subscribe(data => {

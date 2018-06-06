@@ -13,7 +13,7 @@
   cursor: pointer;
 }
 
-.app-artist-element:hover img {
+.app-artist-element:hover img, .selected img{
   opacity: 0.5;
 }
 
@@ -26,7 +26,7 @@
   font-size: 36px;
 }
 
-.app-artist-element:hover .heart-icon {
+.app-artist-element:hover .heart-icon, .selected .heart-icon {
   visibility: visible;
 }
 
