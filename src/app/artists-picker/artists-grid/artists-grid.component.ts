@@ -10,16 +10,13 @@ import { Artist } from '../artist';
 })
 export class ArtistsGridComponent implements OnInit {
   @Input() artists: Artist[];
+
   lazyImageObserver: IntersectionObserver;
 
-  constructor(private artistsService: ArtistsService) { }
+  constructor() { }
 
   ngOnInit() {
     this.initLazyImageObserver();
-  }
-
-  onArtistSelected(artist: Artist) {
-    this.artistsService.addSelectedArtist(artist);
   }
 
   private initLazyImageObserver() {

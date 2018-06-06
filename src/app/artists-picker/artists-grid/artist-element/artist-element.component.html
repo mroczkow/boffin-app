@@ -1,4 +1,4 @@
-<div class="card app-artist-element">
+<div class="card app-artist-element" [ngClass]="{'selected': isSelected}" (click)="onArtistSelected()">
   <div class="img-container">
     <img class="card-img-top lazy"
          src="../../../assets/placeholder.png"
