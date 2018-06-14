@@ -17,22 +17,27 @@
   opacity: 0.5;
 }
 
+.app-artist-element:hover .img-container, .selected .img-container {
+  background-color: #000000;
+}
+
 .heart-icon {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  visibility: hidden;
+  /*visibility: hidden;*/
   font-size: 36px;
+  opacity: 0;
 }
 
-.app-artist-element:hover .heart-icon, .selected .heart-icon {
-  visibility: visible;
-}
+/*.app-artist-element:hover .heart-icon, .selected .heart-icon {*/
+  /*visibility: visible;*/
+/*}*/
 
 .img-container {
   position: relative;
   text-align: center;
   color: white;
-  background-color: #000000;
+  background-color: #ffffff;
 }

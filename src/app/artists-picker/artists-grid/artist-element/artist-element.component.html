@@ -1,11 +1,16 @@
-<div class="card app-artist-element" [ngClass]="{'selected': isSelected}" (click)="onArtistSelected()">
+<div class="card app-artist-element"
+     [ngClass]="{'selected': isSelected}"
+     (click)="onArtistSelected()"
+     (mouseenter)="onMouseEnter()"
+     (mouseleave)="onMouseLeave()">
   <div class="img-container">
     <img class="card-img-top lazy"
-         src="../../../assets/placeholder.png"
-         onError="this.onerror = null; this.src = '../../../assets/placeholder.png';"
+         src="../../../assets/img_placeholder.png"
+         onError="this.onerror = null; this.src = '../../../assets/img_error.png';"
          #artistImage
          alt="{{artist.imageUrl}}"/>
-    <i class="fa fa-heart heart-icon"></i>
+    <i class="fa fa-heart heart-icon" [@fullHeartState]="fullHeartState"></i>
+    <i class="fa fa-heart-o heart-icon" [@emptyHeartState]="emptyHeartState"></i>
   </div>
 
   <div class="card-body">

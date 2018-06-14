@@ -9,11 +9,17 @@ import { Artist } from '../artists-picker/artist';
   styleUrls: ['./recommendations.component.css']
 })
 export class RecommendationsComponent implements OnInit {
-  recommendedArtists: Artist [];
+  // recommendedArtists: string [];
+  recommendedArtists: any;
+  recommendedArtistsNames: any;
 
   constructor(private artistsService: ArtistsService) { }
 
   ngOnInit() {
-    this.recommendedArtists = this.artistsService.getSelectedArtists();
+    this.artistsService.send().subscribe(response => {
+      console.log(response);
+      this.recommendedArtistsNames = Object.keys(response['recommendation']);
+      this.recommendedArtists = response['recommendation'];
+    });
   }
 }
