@@ -35,6 +35,7 @@ export class ArtistsPickerComponent implements OnInit {
 
   onGetRecommendations() {
     console.log(this.artistsService.getSelectedArtists());
+    // this.artistsService.send();
     this.router.navigate(['recommendations']);
 
   }

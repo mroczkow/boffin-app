@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { map } from 'rxjs/operators';
 
 import { Artist } from './artist';
@@ -38,6 +38,13 @@ export class ArtistsService {
 
   getSelectedArtists(): string[] {
     return this.selectedArtists;
+  }
+
+  send() {
+    const chosenArtists = {'chosenArtists': this.selectedArtists};
+    const httpOptions = {headers: new HttpHeaders({'Content-Type':  'application/json'})};
+
+    return this.http.post('http://192.168.0.165:5000/api/recommend', chosenArtists, httpOptions);
   }
 
   private getAllArtists(data) {

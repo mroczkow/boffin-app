@@ -27,6 +27,7 @@ export class ArtistsGridComponent implements OnInit {
             const lazyImage = entry.target;
             lazyImage['src'] = lazyImage['alt'];
             lazyImage.classList.remove('lazy');
+            lazyImage.classList.add('loading');
 
             observer.unobserve(lazyImage);
           }
