@@ -21,3 +21,8 @@
 .nav-link.active {
   cursor: default;
 }
+
+.center {
+  align-items: center;
+  justify-content: center;
+}
