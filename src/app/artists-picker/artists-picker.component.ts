@@ -13,6 +13,7 @@ export class ArtistsPickerComponent implements OnInit {
   selectedYear = 'All';
   filterString = '';
   loaded = false;
+  showTags = window.screen.width > 700 && window.screen.height > 700;
   years: string [];
   artistsToDisplay: Artist[];
   artistsData: {};
@@ -37,6 +38,9 @@ export class ArtistsPickerComponent implements OnInit {
     console.log(this.artistsService.getSelectedArtists());
     // this.artistsService.send();
     this.router.navigate(['recommendations']);
+  }
 
+  onTagsToggle() {
+    this.showTags = !this.showTags;
   }
 }

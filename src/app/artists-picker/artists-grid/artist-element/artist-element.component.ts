@@ -68,19 +68,18 @@ import {animate, group, keyframes, state, style, transition, trigger} from '@ang
 })
 export class ArtistElementComponent implements OnInit {
   @Input() artist: Artist;
+  @Input() showTags: boolean;
   @Input() imageObserver: IntersectionObserver;
 
   @ViewChild('artistImage') artistImage: ElementRef;
 
   isSelected: boolean ;
-  isMobile: boolean;
   fullHeartState = 'not-visible';
   emptyHeartState = 'not-visible';
 
   constructor(private artistsService: ArtistsService) { }
 
   ngOnInit() {
-    this.isMobile = window.screen.width < 700 || window.screen.height < 700;
     this.imageObserver.observe(this.artistImage.nativeElement);
     this.isSelected = this.artistsService.isSelected(this.artist.name);
   }
