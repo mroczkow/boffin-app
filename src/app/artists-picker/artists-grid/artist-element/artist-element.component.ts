@@ -22,10 +22,31 @@ import {animate, group, keyframes, state, style, transition, trigger} from '@ang
       state('hover-selected', style({
         opacity: '1'
       })),
-      transition('selected => hover-selected', animate('0.2s')),
-      transition('hover-selected => not-visible', animate('0.2s')),
-      transition('not-visible => selected', animate('0.2s')),
-      // transition('selected => not-visible', animate('0.2s'))
+      transition('selected <=> hover-selected', animate('0.2s ease')),
+      transition('hover-selected => not-visible', animate('0.2s 100ms ease-in')),
+      transition('not-visible => selected', [
+        group([
+          animate('0.2s', style({
+            opacity: '1'
+          })),
+          animate('0.2s 150ms', style({
+            top: 'calc(0% + 20px)',
+            left: 'calc(100% - 20px)',
+            fontSize: '20px'
+          }))
+        ])
+      ]),
+      transition('selected => not-visible',
+        group([
+          animate('0.2s', style({
+            top: '50%',
+            left: '50%',
+            fontSize: '36px'
+          })),
+          animate('0.2s 200ms', style({
+            opacity: '0'
+          }))
+        ]))
     ]),
     trigger('emptyHeartState', [
       state('visible', style({
@@ -33,7 +54,15 @@ import {animate, group, keyframes, state, style, transition, trigger} from '@ang
       })),
       state('not-visible', style({
         opacity: '0'
-      }))
+      })),
+      state('unselected', style({
+        opacity: '1'
+      })),
+      state('hover-selected', style({
+        opacity: '1'
+      })),
+      transition('not-visible => unselected', animate('10ms 200ms')),
+      transition('not-visible => hover-selected', animate('10ms 200ms'))
     ])
   ]
 })
@@ -58,7 +87,7 @@ export class ArtistElementComponent implements OnInit {
     if (this.isSelected) {
       this.artistsService.removeArtistFromSelected(this.artist.name);
       this.fullHeartState = 'not-visible';
-      this.emptyHeartState = 'visible';
+      this.emptyHeartState = 'unselected';
     } else {
       this.artistsService.addArtistNameToSelected(this.artist.name);
       this.fullHeartState = 'selected';
@@ -74,7 +103,7 @@ export class ArtistElementComponent implements OnInit {
   onMouseEnter() {
     if (this.isSelected) {
       this.fullHeartState = 'hover-selected';
-      this.emptyHeartState = 'not-visible';
+      this.emptyHeartState = 'hover-selected';
     } else {
       this.emptyHeartState = 'visible';
       this.fullHeartState = 'not-visible';
