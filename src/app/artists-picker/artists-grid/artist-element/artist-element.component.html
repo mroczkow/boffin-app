@@ -15,7 +15,7 @@
 
   <div class="card-body">
     <h5 class="card-title">{{ artist.name }}</h5>
-    <div class="row">
+    <div class="row" *ngIf="!isMobile">
       <p class="card-text app-tag-item" *ngFor="let tag of artist.tags">{{tag}}</p>
     </div>
   </div>
