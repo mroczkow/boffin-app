@@ -7,9 +7,11 @@
   padding: 2px;
   font-size: 12px;
 }
-
+.app-artist-element {
+  box-shadow: none !important;
+}
 .app-artist-element:hover {
-  box-shadow: 0 0 1em lightgrey;
+  box-shadow: 0 0 1em lightgrey !important;
   cursor: pointer;
 }
 
@@ -40,4 +42,23 @@
   text-align: center;
   color: white;
   background-color: #ffffff;
+}
+
+.mat-card-title {
+  font-size: 20px;
+}
+
+.nofocus:focus {
+  outline: none;
+}
+
+.tags-toggle {
+  margin: 0 auto;
+  display: block;
+  margin-top: -16px;
+}
+
+.tags-toggle:hover {
+  transform: scale(1.5, 1.5);
+  color: #3f51b5;
 }

@@ -10,7 +10,6 @@ import { Artist } from '../artist';
 })
 export class ArtistsGridComponent implements OnInit {
   @Input() artists: Artist[];
-  @Input() showTags: boolean;
 
   lazyImageObserver: IntersectionObserver;
 

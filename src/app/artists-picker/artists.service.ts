@@ -36,7 +36,7 @@ export class ArtistsService {
     return this.selectedArtists.indexOf(artistName) !== -1;
   }
 
-  getSelectedArtists(): string[] {
+  getSelectedArtistsNames(): string[] {
     return this.selectedArtists;
   }
 

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import { Router } from '@angular/router';
 
 import { ArtistsService } from './artists.service';
@@ -10,10 +10,12 @@ import { Artist } from './artist';
   styleUrls: ['./artists-picker.component.css']
 })
 export class ArtistsPickerComponent implements OnInit {
+  @ViewChild('artistGrid') artistGrid: ElementRef;
+
   selectedYear = 'All';
   filterString = '';
   loaded = false;
-  showTags = window.screen.width > 700 && window.screen.height > 700;
+  showSelected = false;
   years: string [];
   artistsToDisplay: Artist[];
   artistsData: {};
@@ -29,18 +31,32 @@ export class ArtistsPickerComponent implements OnInit {
     });
   }
 
-  onTabSelected(year: string) {
-    this.selectedYear = year;
-    this.artistsToDisplay = this.artistsData[this.selectedYear];
+  onTabSelected(tabNumber: number) {
+    this.selectedYear = this.years[tabNumber];
+    this.setArtistsToDisplay();
+
+    this.artistGrid.nativeElement.scroll(0, 0);
   }
 
   onGetRecommendations() {
-    console.log(this.artistsService.getSelectedArtists());
+    console.log(this.artistsService.getSelectedArtistsNames());
     // this.artistsService.send();
     this.router.navigate(['recommendations']);
   }
 
-  onTagsToggle() {
-    this.showTags = !this.showTags;
+  onToggleSelectedArtists() {
+    this.showSelected = !this.showSelected;
+    this.setArtistsToDisplay();
+  }
+
+  private setArtistsToDisplay() {
+    if (this.showSelected) {
+      const selectedArtistNames = this.artistsService.getSelectedArtistsNames();
+      this.artistsToDisplay = this.artistsData[this.selectedYear].filter(artist => {
+        return selectedArtistNames.indexOf(artist.name) !== -1;
+      });
+    } else {
+      this.artistsToDisplay = this.artistsData[this.selectedYear];
+    }
   }
 }

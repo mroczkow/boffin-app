@@ -26,3 +26,21 @@
   align-items: center;
   justify-content: center;
 }
+
+.search-prefix {
+  padding-right: 5px;
+}
+
+.mat-form-field {
+  width: 100%;
+}
+
+.scrollable {
+  overflow-y: scroll;
+}
+
+/deep/.mat-tab-label, /deep/.mat-tab-label-active {
+        min-width: 80px !important;
+        padding: 3px!important;
+        margin: 3px!important;
+      }

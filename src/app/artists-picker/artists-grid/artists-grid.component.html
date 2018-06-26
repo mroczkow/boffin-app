@@ -1,11 +1,14 @@
-<div class="container-fluid">
+<div class="container-fluid" *ngIf="artists.length > 0">
   <div class="row">
     <div class="col-6 col-sm-4 col-md-3 col-lg-2 app-grid-element" *ngFor="let artist of artists">
       <app-artist-element
         [artist]="artist"
-        [showTags]="showTags"
         [imageObserver]="lazyImageObserver">
       </app-artist-element>
     </div>
   </div>
+</div>
+
+<div class="container-fluid center-content" *ngIf="artists.length === 0">
+  <p class="empty-filter-info">No artists to show.</p>
 </div>

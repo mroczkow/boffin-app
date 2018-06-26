@@ -1,8 +1,18 @@
 :host {
   display: flex;
-  overflow-y: scroll
+  flex: 1;
+}
+
+.center-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .app-grid-element {
   padding: 10px;
+}
+
+.empty-filter-info {
+  color: rgba(0,0,0,.5);
 }

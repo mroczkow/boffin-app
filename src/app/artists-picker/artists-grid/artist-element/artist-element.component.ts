@@ -26,10 +26,10 @@ import {animate, group, keyframes, state, style, transition, trigger} from '@ang
       transition('hover-selected => not-visible', animate('0.2s 100ms ease-in')),
       transition('not-visible => selected', [
         group([
-          animate('0.2s', style({
+          animate('200ms ease-in', style({
             opacity: '1'
           })),
-          animate('0.2s 150ms', style({
+          animate('0.2s 200ms ease-in', style({
             top: 'calc(0% + 20px)',
             left: 'calc(100% - 20px)',
             fontSize: '20px'
@@ -62,18 +62,20 @@ import {animate, group, keyframes, state, style, transition, trigger} from '@ang
         opacity: '1'
       })),
       transition('not-visible => unselected', animate('10ms 200ms')),
-      transition('not-visible => hover-selected', animate('10ms 200ms'))
+      transition('not-visible => hover-selected', animate('10ms 200ms')),
+      transition('visible => not-visible', animate('200ms'))
     ])
   ]
 })
 export class ArtistElementComponent implements OnInit {
   @Input() artist: Artist;
-  @Input() showTags: boolean;
   @Input() imageObserver: IntersectionObserver;
 
   @ViewChild('artistImage') artistImage: ElementRef;
 
   isSelected: boolean ;
+  showTags: boolean;
+  isMobile = window.screen.width < 700 || window.screen.height < 700;
   fullHeartState = 'not-visible';
   emptyHeartState = 'not-visible';
 
@@ -81,7 +83,13 @@ export class ArtistElementComponent implements OnInit {
 
   ngOnInit() {
     this.imageObserver.observe(this.artistImage.nativeElement);
+    this.showTags = !this.isMobile;
     this.isSelected = this.artistsService.isSelected(this.artist.name);
+
+    if (this.isSelected) {
+      this.fullHeartState = 'selected';
+      this.emptyHeartState = 'not-visible';
+    }
   }
 
   onArtistSelected() {
@@ -95,10 +103,6 @@ export class ArtistElementComponent implements OnInit {
       this.emptyHeartState = 'not-visible';
     }
     this.isSelected = !this.isSelected;
-  }
-
-  animationDone($event) {
-    console.log($event);
   }
 
   onMouseEnter() {
@@ -119,5 +123,10 @@ export class ArtistElementComponent implements OnInit {
       this.fullHeartState = 'not-visible';
       this.emptyHeartState = 'not-visible';
     }
+  }
+
+  onTagsToggle(event) {
+    this.showTags = !this.showTags;
+    event.stopPropagation();
   }
 }

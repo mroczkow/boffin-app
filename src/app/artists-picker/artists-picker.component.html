@@ -2,38 +2,38 @@
   <div *ngIf="!loaded" class="loader"></div>
 
   <div class="row align-items-center" *ngIf="loaded">
-    <div class="col col-12 col-sm-6 col-md-4">
-      <input class="form-control" type="text" [(ngModel)]="filterString" placeholder="Artist name...">
+    <div class="col col-12 col-sm-6 col-md-4 order-last order-sm-first">
+      <mat-form-field class="example-full-width">
+        <span matPrefix class="fa fa-search search-prefix"></span>
+        <input type="text" matInput placeholder="Artist name..." [(ngModel)]="filterString">
+        <button mat-button matSuffix mat-icon-button *ngIf="filterString" (click)="filterString=''">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
     </div>
 
-    <div class="col col-2 align-conten-center">
-      <div class="form-check">
-        <label class="form-check-label">
-          <input type="checkbox" class="form-check-input" (click)="onTagsToggle()" [checked]="showTags">
-          Tags
-        </label>
-      </div>
+    <div class="col col-sm-3 col-md-3 align-conten-center order-first">
+      <mat-slide-toggle color="primary" (click)="onToggleSelectedArtists()" [checked]="false">
+        Selected artists
+      </mat-slide-toggle>
     </div>
 
-    <div class="col col-4">
-      <button class="btn btn-light"
-              (click)="onGetRecommendations()">Done
-      </button>
+    <div class="col col-sm-3 col-md-5 text-right order-sm-last">
+      <button mat-raised-button color="primary" (click)="onGetRecommendations()">Done</button>
     </div>
   </div>
 
   <div class="row" *ngIf="loaded">
     <div class="col col-12">
-      <ul class="nav nav-tabs app-tabs">
-        <li class="nav-item" *ngFor="let year of years">
-          <a class="nav-link" (click)="onTabSelected(year)" [ngClass]="{'active': selectedYear === year}">{{year}}</a>
-        </li>
-      </ul>
+      <mat-tab-group (selectedIndexChange)="onTabSelected($event)">
+        <mat-tab *ngFor="let year of years" label={{year}}>
+        </mat-tab>
+      </mat-tab-group>
     </div>
   </div>
 
-  <div class="content" *ngIf="loaded">
-    <app-artists-grid [artists]="artistsToDisplay | filter:filterString:'name'" [showTags]="showTags"></app-artists-grid>
+  <div class="content scrollable" *ngIf="loaded" #artistGrid>
+    <app-artists-grid [artists]="artistsToDisplay | filter:filterString:'name'"></app-artists-grid>
   </div>
 </div>
 

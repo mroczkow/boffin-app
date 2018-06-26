@@ -1,9 +1,10 @@
-<div class="card app-artist-element"
-     [ngClass]="{'selected': isSelected}"
-     (click)="onArtistSelected()"
-     (mouseenter)="onMouseEnter()"
-     (mouseleave)="onMouseLeave()">
-  <div class="img-container">
+<mat-card class="card app-artist-element"
+          [ngClass]="{'selected': isSelected}"
+          (click)="onArtistSelected()"
+          (mouseenter)="onMouseEnter()"
+          (mouseleave)="onMouseLeave()">
+
+  <div class="img-container" mat-card-image>
     <img class="card-img-top lazy"
          src="../../../assets/img_placeholder.png"
          onError="this.onerror = null; this.src = '../../../assets/img_error.png';"
@@ -13,10 +14,15 @@
     <i class="fa fa-heart-o heart-icon" [@emptyHeartState]="emptyHeartState"></i>
   </div>
 
-  <div class="card-body">
-    <h5 class="card-title">{{ artist.name }}</h5>
+  <mat-card-content>
+    <mat-card-title>{{ artist.name }}</mat-card-title>
     <div class="row" *ngIf="showTags">
       <p class="card-text app-tag-item" *ngFor="let tag of artist.tags">{{tag}}</p>
     </div>
-  </div>
-</div>
+  </mat-card-content>
+
+  <mat-card-actions *ngIf="artist.tags.length && isMobile">
+    <mat-icon class="tags-toggle" *ngIf="!showTags" (click)="onTagsToggle($event)">expand_more</mat-icon>
+    <mat-icon class="tags-toggle" *ngIf="showTags" (click)="onTagsToggle($event)">expand_less</mat-icon>
+  </mat-card-actions>
+</mat-card>
