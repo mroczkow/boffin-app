@@ -1,19 +1,19 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map } from 'rxjs/operators';
-import { Subject } from 'rxjs/index';
+import { Observable, Subject } from 'rxjs/index';
 
 import { Artist } from './artist';
 
 @Injectable()
 export class ArtistsService {
-  private selectedArtists: string[] = [];
+  recommendationsReady = new Subject<{[artistName: string]: number}>();
 
-  recommendationsReady = new Subject<{}>();
+  private selectedArtists: string[] = [];
 
   constructor(private http: HttpClient) {}
 
-  getHistoricData() {
+  getHistoricData(): Observable<Object> {
     return this.http.get('assets/artists.json').pipe(
       map(data => {
         delete data[2018];
@@ -35,7 +35,7 @@ export class ArtistsService {
     this.selectedArtists.splice(artistIndex, 1);
   }
 
-  isSelected(artistName: string) {
+  isSelected(artistName: string): boolean {
     return this.selectedArtists.indexOf(artistName) !== -1;
   }
 
@@ -55,7 +55,7 @@ export class ArtistsService {
     });
   }
 
-  private getAllArtists(data) {
+  private getAllArtists(data): Artist[] {
     let allArtists = [];
     Object.keys(data).forEach(year => {
       allArtists = allArtists.concat(data[year]);
@@ -64,7 +64,7 @@ export class ArtistsService {
     return this.getSortedArtists(this.removeDuplicates(allArtists));
   }
 
-  private getSortedArtists(artists: Artist[]) {
+  private getSortedArtists(artists: Artist[]): Artist[] {
     return artists.sort((artist1, artist2) => {
       const name1 = artist1.name.toUpperCase();
       const name2 = artist2.name.toUpperCase();
@@ -73,7 +73,7 @@ export class ArtistsService {
     });
   }
 
-  private removeDuplicates(artists: Artist[]) {
+  private removeDuplicates(artists: Artist[]): Artist[] {
     return artists.filter((object, index, array) => {
       return array.map(mapObj => mapObj.name).indexOf(object.name) === index;
     });

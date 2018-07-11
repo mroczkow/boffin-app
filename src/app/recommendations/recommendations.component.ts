@@ -1,8 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs/index';
 
 import { ArtistsService } from '../artists-picker/artists.service';
 import { TimetableService } from './timetable.service';
-import { Subscription } from 'rxjs/index';
+import { TimetableEvent } from './timetable-event';
 
 @Component({
   selector: 'app-recommendations',
@@ -10,15 +11,15 @@ import { Subscription } from 'rxjs/index';
   styleUrls: ['./recommendations.component.css']
 })
 export class RecommendationsComponent implements OnInit, OnDestroy {
-  events = [];
-  recommendations = undefined;
-  selectedDayId = 0;
-  loaded = false;
+  private subscription: Subscription;
   viewDate: Date;
   nextDate: Date;
   days: string [];
 
-  private subscription: Subscription;
+  events: TimetableEvent[][] = undefined;
+  recommendations: {[artistName: string]: number} = undefined;
+  selectedDayId = 0;
+  loaded = false;
 
   constructor(private artistsService: ArtistsService, private timetableService: TimetableService) { }
 
@@ -51,11 +52,11 @@ export class RecommendationsComponent implements OnInit, OnDestroy {
     this.events = this.timetableService.getEventsList(this.selectedDayId, this.recommendations);
   }
 
-  getStagesNames() {
+  getStagesNames(): string[] {
     return this.timetableService.getStagesNames(this.selectedDayId);
   }
 
-  getNextDate(date: Date) {
+  getNextDate(date: Date): Date {
     const newDate = new Date(date);
     newDate.setDate(newDate.getDate() + 1);
 

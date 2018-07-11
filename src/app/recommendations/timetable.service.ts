@@ -1,11 +1,12 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+
 import { TimetableEvent } from './timetable-event';
 
 @Injectable()
 export class TimetableService {
-  private timetable: {} = undefined;
   private days: string[];
+  private timetable: {};
 
   constructor(private http: HttpClient) { }
 
@@ -25,7 +26,7 @@ export class TimetableService {
     return this.days;
   }
 
-  getStagesNames(dayId: number) {
+  getStagesNames(dayId: number): string[] {
     return Object.keys(this.timetable[this.days[dayId]].stages);
   }
 
@@ -33,7 +34,7 @@ export class TimetableService {
     return new Date(this.timetable[this.days[dayId]].date);
   }
 
-  getEventsList(dayId: number, recommendations?) {
+  getEventsList(dayId: number, recommendations?): TimetableEvent[][]{
     const events = [];
     const stages: {} = this.timetable[this.days[dayId]].stages;
 

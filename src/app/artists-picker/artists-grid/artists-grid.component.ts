@@ -1,6 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
 
-import { ArtistsService } from '../artists.service';
 import { Artist } from '../artist';
 
 @Component({

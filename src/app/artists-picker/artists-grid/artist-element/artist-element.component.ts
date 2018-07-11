@@ -1,8 +1,8 @@
 import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
+import { animate, group, state, style, transition, trigger } from '@angular/animations';
 
 import { Artist } from '../../artist';
 import { ArtistsService } from '../../artists.service';
-import { animate, group, state, style, transition, trigger } from '@angular/animations';
 
 @Component({
   selector: 'app-artist-element',
@@ -75,13 +75,15 @@ export class ArtistElementComponent implements OnInit {
 
   isSelected: boolean ;
   showTags: boolean;
-  isMobile = window.screen.width < 700 || window.screen.height < 700;
+  isMobile: boolean;
+
   fullHeartState = 'not-visible';
   emptyHeartState = 'not-visible';
 
   constructor(private artistsService: ArtistsService) { }
 
   ngOnInit() {
+    this.isMobile = window.screen.width < 700 || window.screen.height < 700;
     this.imageObserver.observe(this.artistImage.nativeElement);
     this.showTags = !this.isMobile;
     this.isSelected = this.artistsService.isSelected(this.artist.name);

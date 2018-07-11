@@ -1,4 +1,4 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { ArtistsService } from './artists.service';
@@ -12,13 +12,14 @@ import { Artist } from './artist';
 export class ArtistsPickerComponent implements OnInit {
   @ViewChild('artistGrid') artistGrid: ElementRef;
 
+  years: string [];
+  artistsToDisplay: Artist[];
+  artistsData: {};
+
   selectedYear = 'All';
   filterString = '';
   loaded = false;
   showSelected = false;
-  years: string [];
-  artistsToDisplay: Artist[];
-  artistsData: {};
 
   constructor(private artistsService: ArtistsService, private router: Router) { }
 
