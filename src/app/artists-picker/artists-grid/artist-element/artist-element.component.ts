@@ -2,7 +2,7 @@ import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
 
 import { Artist } from '../../artist';
 import { ArtistsService } from '../../artists.service';
-import {animate, group, keyframes, state, style, transition, trigger} from '@angular/animations';
+import { animate, group, state, style, transition, trigger } from '@angular/animations';
 
 @Component({
   selector: 'app-artist-element',

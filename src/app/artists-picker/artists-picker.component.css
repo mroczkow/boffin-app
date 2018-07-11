@@ -3,13 +3,6 @@
   flex: 1;
 }
 
-.content {
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-  margin: 10px;
-}
-
 .app-tabs {
   margin-top: 10px;
 }
@@ -22,21 +15,12 @@
   cursor: default;
 }
 
-.center {
-  align-items: center;
-  justify-content: center;
-}
-
 .search-prefix {
   padding-right: 5px;
 }
 
 .mat-form-field {
   width: 100%;
-}
-
-.scrollable {
-  overflow-y: scroll;
 }
 
 /deep/.mat-tab-label, /deep/.mat-tab-label-active {

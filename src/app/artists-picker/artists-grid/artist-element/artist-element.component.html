@@ -17,7 +17,9 @@
   <mat-card-content>
     <mat-card-title>{{ artist.name }}</mat-card-title>
     <div class="row" *ngIf="showTags">
-      <p class="card-text app-tag-item" *ngFor="let tag of artist.tags">{{tag}}</p>
+      <div class="app-tag-item" *ngFor="let tag of artist.tags">
+        <p class="card-text tag-text">{{tag}}</p>
+      </div>
     </div>
   </mat-card-content>
 

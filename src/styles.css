@@ -1,10 +1,12 @@
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import "~angular-calendar/css/angular-calendar.css";
 
 body {
     display: flex;
     flex-direction: column;
     height: 100vh;
     overflow: hidden;
+  font-family: Roboto,"Helvetica Neue",sans-serif !important;
 }
 
 .loader {
@@ -19,4 +21,62 @@ body {
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  margin-right: 10px;
+  margin-left: 10px;
+  margin-bottom: 10px;
+}
+
+.scrollable {
+  overflow-y: scroll;
+}
+
+.center {
+  align-items: center;
+  justify-content: center;
+}
+
+button {
+  outline: none !important;
+}
+
+.row {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+.cal-day-view .cal-time {
+  font-size: 14px;
+  font-weight: normal;
+}
+
+.cal-day-view .cal-event-container {
+  margin-left: 0 !important;
+  width: 100% !important;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.cal-day-view .cal-hour.cal-hour-segment:hover,
+.cal-day-view .cal-hour .cal-hour-segment {
+  background-color: white;
+}
+
+.cal-day-view .cal-hour-segment {
+  border-bottom: thin dashed #e1e1e1;
+}
+
+.cal-day-view .cal-hour-rows {
+  border: none;
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
+
+.cal-day-view .cal-event-title:link {
+  color: rgba(0, 0, 0, 0.7);
 }

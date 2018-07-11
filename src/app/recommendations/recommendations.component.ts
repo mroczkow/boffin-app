@@ -1,25 +1,68 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 
 import { ArtistsService } from '../artists-picker/artists.service';
-import { Artist } from '../artists-picker/artist';
+import { TimetableService } from './timetable.service';
+import { Subscription } from 'rxjs/index';
 
 @Component({
   selector: 'app-recommendations',
   templateUrl: './recommendations.component.html',
   styleUrls: ['./recommendations.component.css']
 })
-export class RecommendationsComponent implements OnInit {
-  // recommendedArtists: string [];
-  recommendedArtists: any;
-  recommendedArtistsNames: any;
+export class RecommendationsComponent implements OnInit, OnDestroy {
+  events = [];
+  recommendations = undefined;
+  selectedDayId = 0;
+  loaded = false;
+  viewDate: Date;
+  nextDate: Date;
+  days: string [];
 
-  constructor(private artistsService: ArtistsService) { }
+  private subscription: Subscription;
+
+  constructor(private artistsService: ArtistsService, private timetableService: TimetableService) { }
 
   ngOnInit() {
-    this.artistsService.send().subscribe(response => {
-      console.log(response);
-      this.recommendedArtistsNames = Object.keys(response['recommendation']);
-      this.recommendedArtists = response['recommendation'];
+    this.days = this.timetableService.getDays();
+    this.viewDate = this.timetableService.getViewDate(this.selectedDayId);
+    this.nextDate = this.getNextDate(this.viewDate);
+    this.recommendations = JSON.parse(localStorage.getItem('recommendation'));
+    this.events = this.timetableService.getEventsList(this.selectedDayId, this.recommendations);
+
+    this.subscription = this.artistsService.recommendationsReady.subscribe(data => {
+      this.recommendations = data;
+      this.events = this.timetableService.getEventsList(this.selectedDayId, this.recommendations);
     });
+
+    this.loaded = true;
+  }
+
+  onGoToPrevious() {
+    this.selectedDayId--;
+    this.viewDate = this.timetableService.getViewDate(this.selectedDayId);
+    this.nextDate = this.getNextDate(this.viewDate);
+    this.events = this.timetableService.getEventsList(this.selectedDayId, this.recommendations);
+  }
+
+  onGoToNext() {
+    this.selectedDayId++;
+    this.viewDate = this.timetableService.getViewDate(this.selectedDayId);
+    this.nextDate = this.getNextDate(this.viewDate);
+    this.events = this.timetableService.getEventsList(this.selectedDayId, this.recommendations);
+  }
+
+  getStagesNames() {
+    return this.timetableService.getStagesNames(this.selectedDayId);
+  }
+
+  getNextDate(date: Date) {
+    const newDate = new Date(date);
+    newDate.setDate(newDate.getDate() + 1);
+
+    return newDate;
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 }

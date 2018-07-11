@@ -1,0 +1,40 @@
+:host {
+  display: flex;
+  flex: 1;
+}
+
+.header {
+  margin-bottom: 0px !important;
+}
+
+.navigation-header {
+  margin-bottom: 15px;
+}
+
+.date {
+  color: rgba(0,0,0,.5);
+  font-size: 14px;
+}
+.stages-header {
+  padding-left: 105px;
+  color: rgba(0,0,0,.5);
+  font-size: 14px;
+  border-bottom: thin solid #e1e1e1;
+  margin-left: 1px;
+  margin-right: 1px;
+}
+
+.stage {
+  margin-bottom: 10px;
+}
+
+.timetable {
+  padding: 0 !important;
+  color: transparent;
+}
+
+.hours-segment {
+  width: 105px;
+  color: rgba(0, 0, 0, 0.5);
+}
+

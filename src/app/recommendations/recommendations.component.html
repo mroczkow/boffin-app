@@ -1,3 +1,75 @@
-<p *ngFor="let recomendation of recommendedArtistsNames">
-  {{ recomendation }} - {{recommendedArtists[recomendation]}}
-</p>
+<div class="container-fluid content" [ngClass]="{'center': !loaded}">
+  <div *ngIf="!loaded" class="loader"></div>
+
+  <div class="row">
+    <div class="col-12 content header" *ngIf="loaded">
+      <div class="row navigation-header">
+        <div class="col-2">
+          <button
+            mat-mini-fab color="primary"
+            [disabled]="selectedDayId === 0"
+            (click)="onGoToPrevious()" >
+            <mat-icon>arrow_back</mat-icon>
+          </button>
+        </div>
+
+        <div class="col-8 text-center">
+          <h4>{{days[selectedDayId] | titlecase}}</h4>
+          <p class="date">{{ viewDate | date:'d MMMM' }}</p>
+        </div>
+
+        <div class="col-2 text-right">
+          <button
+            mat-mini-fab color="primary"
+            [disabled]="selectedDayId === days.length - 1" (click)="onGoToNext()" >
+            <mat-icon>arrow_forward</mat-icon>
+          </button>
+        </div>
+      </div>
+
+      <div class="row stages-header">
+        <div class="col-3 text-center stage" *ngFor="let stageName of getStagesNames()">
+          <p> {{stageName}} </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="scrollable" *ngIf="loaded">
+    <div class="row">
+      <div class="hours-segment">
+        <mwl-calendar-day-view
+          [viewDate]="viewDate"
+          [events]=""
+          [dayStartHour]="15"
+          [dayEndHour]="24">
+        </mwl-calendar-day-view>
+        <mwl-calendar-day-view
+          [viewDate]="nextDate"
+          [events]=""
+          [dayStartHour]="00"
+          [dayEndHour]="3">
+        </mwl-calendar-day-view>
+      </div>
+
+      <div class="col timetable">
+        <div class="row">
+          <div class="col-3 timetable" *ngFor="let stageEvents of events">
+            <mwl-calendar-day-view
+              [viewDate]="viewDate"
+              [events]="stageEvents"
+              [dayStartHour]="15"
+              [dayEndHour]="24">
+            </mwl-calendar-day-view>
+            <mwl-calendar-day-view
+              [viewDate]="nextDate"
+              [events]="stageEvents"
+              [dayStartHour]="00"
+              [dayEndHour]="3">
+            </mwl-calendar-day-view>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

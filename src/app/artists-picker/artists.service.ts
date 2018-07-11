@@ -1,12 +1,15 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map } from 'rxjs/operators';
+import { Subject } from 'rxjs/index';
 
 import { Artist } from './artist';
 
 @Injectable()
 export class ArtistsService {
   private selectedArtists: string[] = [];
+
+  recommendationsReady = new Subject<{}>();
 
   constructor(private http: HttpClient) {}
 
@@ -44,7 +47,12 @@ export class ArtistsService {
     const chosenArtists = {'chosenArtists': this.selectedArtists};
     const httpOptions = {headers: new HttpHeaders({'Content-Type':  'application/json'})};
 
-    return this.http.post('http://192.168.0.165:5000/api/recommend', chosenArtists, httpOptions);
+    localStorage.setItem('recommendation', null);
+
+    this.http.post('https://boffin-api.herokuapp.com/api/recommend', chosenArtists, httpOptions).subscribe(response => {
+      this.recommendationsReady.next(response['recommendation']);
+      localStorage.setItem('recommendation', JSON.stringify(response['recommendation']));
+    });
   }
 
   private getAllArtists(data) {
