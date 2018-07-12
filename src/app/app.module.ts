@@ -7,13 +7,14 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatTabsModule } from '@angular/material/tabs';
-import { MatChipsModule } from '@angular/material/chips';
+import { MatToolbarModule } from '@angular/material/toolbar';
 import { CalendarModule } from 'angular-calendar';
 
 import { AppComponent } from './app.component';
@@ -51,13 +52,14 @@ export function timetableServiceFactory(provider: TimetableService) {
     HttpClientModule,
     FormsModule,
     BrowserAnimationsModule,
+    FlexLayoutModule,
     MatSlideToggleModule,
     MatInputModule,
     MatIconModule,
     MatButtonModule,
     MatCardModule,
     MatTabsModule,
-    MatChipsModule,
+    MatToolbarModule,
     CalendarModule.forRoot(),
     RouterModule.forRoot(appRoutes)
   ],

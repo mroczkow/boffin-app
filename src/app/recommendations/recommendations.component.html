@@ -1,42 +1,38 @@
-<div class="container-fluid content" [ngClass]="{'center': !loaded}">
+<div class="app-content app-view-container" [ngClass]="{'center': !loaded}">
   <div *ngIf="!loaded" class="loader"></div>
 
-  <div class="row">
-    <div class="col-12 content header" *ngIf="loaded">
-      <div class="row navigation-header">
-        <div class="col-2">
-          <button
-            mat-mini-fab color="primary"
-            [disabled]="selectedDayId === 0"
-            (click)="onGoToPrevious()" >
-            <mat-icon>arrow_back</mat-icon>
-          </button>
-        </div>
+  <div fxLayout="row">
+    <div fxFlex="20">
+      <button
+        mat-mini-fab color="primary"
+        [disabled]="selectedDayId === 0"
+        (click)="onGoToPrevious()" >
+        <mat-icon>arrow_back</mat-icon>
+      </button>
+    </div>
 
-        <div class="col-8 text-center">
-          <h4>{{days[selectedDayId] | titlecase}}</h4>
-          <p class="date">{{ viewDate | date:'d MMMM' }}</p>
-        </div>
+    <div fxFlex="60" fxLayout="column" fxLayoutAlign.gt-xs="center center">
+      <h4>{{days[selectedDayId] | titlecase}}</h4>
+      <p class="date">{{ viewDate | date:'d MMMM' }}</p>
+    </div>
 
-        <div class="col-2 text-right">
-          <button
-            mat-mini-fab color="primary"
-            [disabled]="selectedDayId === days.length - 1" (click)="onGoToNext()" >
-            <mat-icon>arrow_forward</mat-icon>
-          </button>
-        </div>
-      </div>
+    <div fxFlex="20" fxLayoutAlign="end start">
+      <button
+        mat-mini-fab color="primary"
+        [disabled]="selectedDayId === days.length - 1" (click)="onGoToNext()" >
+        <mat-icon>arrow_forward</mat-icon>
+      </button>
+    </div>
+  </div>
 
-      <div class="row stages-header">
-        <div class="col-3 text-center stage" *ngFor="let stageName of getStagesNames()">
-          <p> {{stageName}} </p>
-        </div>
-      </div>
+  <div fxLayout="row" class="stages-header">
+    <div fxFlex="25" fxLayoutAlign="center start" class="stage-title" *ngFor="let stageName of getStagesNames()">
+      <p> {{stageName}} </p>
     </div>
   </div>
 
   <div class="scrollable" *ngIf="loaded">
-    <div class="row">
+    <div fxLayout="row">
       <div class="hours-segment">
         <mwl-calendar-day-view
           [viewDate]="viewDate"
@@ -52,9 +48,9 @@
         </mwl-calendar-day-view>
       </div>
 
-      <div class="col timetable">
-        <div class="row">
-          <div class="col-3 timetable" *ngFor="let stageEvents of events">
+      <div class="timetable">
+        <div fxLayout="row">
+          <div fxFlex="25" class="timetable" *ngFor="let stageEvents of events">
             <mwl-calendar-day-view
               [viewDate]="viewDate"
               [events]="stageEvents"

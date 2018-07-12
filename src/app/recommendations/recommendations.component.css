@@ -16,7 +16,7 @@
   font-size: 14px;
 }
 .stages-header {
-  padding-left: 105px;
+  padding-left: 100px;
   color: rgba(0,0,0,.5);
   font-size: 14px;
   border-bottom: thin solid #e1e1e1;
@@ -24,13 +24,14 @@
   margin-right: 1px;
 }
 
-.stage {
+.stage-title {
   margin-bottom: 10px;
 }
 
 .timetable {
   padding: 0 !important;
   color: transparent;
+  width: calc(100% - 70px);
 }
 
 .hours-segment {

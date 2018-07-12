@@ -1,17 +1,13 @@
-<div class="container-fluid content">
-  <div class="row">
-    <div class="col">
+<div class="app-content">
+  <div fxFlex fxLayoutAlign="center center">
+    <div fxLayout="column" fxLayoutAlign="center center" >
       <h3>Meet Boffin, your OFF Festival guide</h3>
       <br>
       <p>He is a mad scientist and music freak, who will help you choose artists you should definitely see this year!</p>
       <p>Just tell him, which artists you have loved in past years.</p>
       <br>
 
-      <div class="row text-center">
-        <div class="col">
-          <a class="btn btn-light" [routerLink]="['artists']" role="button">Start</a>
-        </div>
-      </div>
+      <button mat-raised-button color="primary" [routerLink]="['artists']" role="button">Start</button>
     </div>
   </div>
 </div>

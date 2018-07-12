@@ -17,7 +17,7 @@ export class ArtistsService {
     return this.http.get('assets/artists.json').pipe(
       map(data => {
         delete data[2018];
-        data['All'] = this.getAllArtists(data);
+        // data['All'] = this.getAllArtists(data);
 
         return data;
       })

@@ -16,7 +16,7 @@ export class ArtistsPickerComponent implements OnInit {
   artistsToDisplay: Artist[];
   artistsData: {};
 
-  selectedYear = 'All';
+  selectedYear = '2017';
   filterString = '';
   loaded = false;
   showSelected = false;

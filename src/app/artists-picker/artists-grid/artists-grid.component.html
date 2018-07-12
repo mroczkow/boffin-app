@@ -1,14 +1,16 @@
-<div class="container-fluid" *ngIf="artists.length > 0">
-  <div class="row">
-    <div class="col-6 col-sm-4 col-md-3 col-lg-2 app-grid-element" *ngFor="let artist of artists">
+<div class="app-content" *ngIf="artists.length > 0">
+  <div fxLayout="row wrap" fxLayoutAlign="center">
+    <div *ngFor="let artist of artists" fxFlex.xs="50" fxFlex.gt-xs="33" fxFlex.gt-sm="20" fxFlex.gt-md="16.5" fxFlex.gt-lg="12.5" class="app-grid-element">
       <app-artist-element
         [artist]="artist"
         [imageObserver]="lazyImageObserver">
       </app-artist-element>
     </div>
+
+    <div fxFlex></div>
   </div>
 </div>
 
-<div class="container-fluid center-content" *ngIf="artists.length === 0">
+<div class="app-content center" *ngIf="artists.length === 0">
   <p class="empty-filter-info">No artists to show.</p>
 </div>

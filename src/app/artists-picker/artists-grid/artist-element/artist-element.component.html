@@ -15,16 +15,19 @@
   </div>
 
   <mat-card-content>
-    <mat-card-title>{{ artist.name }}</mat-card-title>
-    <div class="row" *ngIf="showTags">
+    <mat-card-title class="smaller-margin">
+      {{ artist.name }}
+    </mat-card-title>
+
+    <div fxLayout="row wrap" *ngIf="showTags" class="smaller-margin">
       <div class="app-tag-item" *ngFor="let tag of artist.tags">
         <p class="card-text tag-text">{{tag}}</p>
       </div>
     </div>
   </mat-card-content>
 
-  <mat-card-actions *ngIf="artist.tags.length && isMobile">
-    <mat-icon class="tags-toggle" *ngIf="!showTags" (click)="onTagsToggle($event)">expand_more</mat-icon>
-    <mat-icon class="tags-toggle" *ngIf="showTags" (click)="onTagsToggle($event)">expand_less</mat-icon>
-  </mat-card-actions>
+  <div fxLayout="row" fxLayoutAlign="center center" *ngIf="artist.tags.length && isMobile">
+    <mat-icon *ngIf="!showTags" (click)="onTagsToggle($event)">expand_more</mat-icon>
+    <mat-icon *ngIf="showTags" (click)="onTagsToggle($event)">expand_less</mat-icon>
+  </div>
 </mat-card>
