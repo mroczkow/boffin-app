@@ -1,5 +1,6 @@
-import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, ElementRef, OnDestroy } from '@angular/core';
 import { animate, group, state, style, transition, trigger } from '@angular/animations';
+import { Subscription } from 'rxjs/index';
 
 import { Artist } from '../../artist';
 import { ArtistsService } from '../../artists.service';
@@ -67,12 +68,13 @@ import { ArtistsService } from '../../artists.service';
     ])
   ]
 })
-export class ArtistElementComponent implements OnInit {
+export class ArtistElementComponent implements OnInit, OnDestroy {
   @Input() artist: Artist;
   @Input() imageObserver: IntersectionObserver;
 
   @ViewChild('artistImage') artistImage: ElementRef;
 
+  private subscription: Subscription;
   isSelected: boolean ;
   showTags: boolean;
   isMobile: boolean;
@@ -93,7 +95,7 @@ export class ArtistElementComponent implements OnInit {
       this.emptyHeartState = 'not-visible';
     }
 
-    this.artistsService.selectedArtistsUpdated.subscribe(() => {
+    this.subscription = this.artistsService.selectedArtistsUpdated.subscribe(() => {
       this.isSelected = this.artistsService.isSelected(this.artist.name);
       this.fullHeartState = 'not-visible';
       this.emptyHeartState = 'not-visible';
@@ -136,5 +138,9 @@ export class ArtistElementComponent implements OnInit {
   onTagsToggle(event) {
     this.showTags = !this.showTags;
     event.stopPropagation();
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 }

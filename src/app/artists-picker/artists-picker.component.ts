@@ -1,8 +1,10 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
+import { MatDialog, MatDialogConfig } from '@angular/material';
 
 import { ArtistsService } from './artists.service';
 import { Artist } from './artist';
+import { SaveDialogComponent } from '../shared/save-dialog/save-dialog.component';
 
 @Component({
   selector: 'app-artists-picker',
@@ -21,7 +23,7 @@ export class ArtistsPickerComponent implements OnInit {
   loaded = false;
   showSelected = false;
 
-  constructor(private artistsService: ArtistsService, private router: Router) { }
+  constructor(private artistsService: ArtistsService, private dialog: MatDialog) { }
 
   ngOnInit() {
     this.artistsService.getHistoricData().subscribe(data => {
@@ -41,7 +43,7 @@ export class ArtistsPickerComponent implements OnInit {
 
   onGetRecommendations() {
     this.artistsService.send();
-    this.router.navigate(['recommendations']);
+    this.openDialog();
   }
 
   onToggleSelectedArtists() {
@@ -58,5 +60,12 @@ export class ArtistsPickerComponent implements OnInit {
     } else {
       this.artistsToDisplay = this.artistsData[this.selectedYear];
     }
+  }
+
+  private openDialog() {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+
+    this.dialog.open(SaveDialogComponent, dialogConfig);
   }
 }

@@ -10,14 +10,13 @@
       <button mat-button [routerLink]="['recommendations']" routerLinkActive="active">Recommendations</button>
     </div>
 
-    <!-- This fills the remaining space of the current row -->
     <span class="fill-remaining-space"></span>
 
-    <button mat-icon-button (click)="onSaveUserTaste()">
+    <button mat-icon-button (click)="onSaveUserTaste()" [hidden]="isHomePage()">
       <mat-icon>save_outline</mat-icon>
     </button>
 
-    <button mat-icon-button (click)="onClearUserTaste()">
+    <button mat-icon-button (click)="onClearUserTaste()" [hidden]="isHomePage()">
       <mat-icon>delete_outline</mat-icon>
     </button>
   </mat-toolbar>

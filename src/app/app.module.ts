@@ -15,6 +15,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatDialogModule } from '@angular/material';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { CalendarModule } from 'angular-calendar';
 
 import { AppComponent } from './app.component';
@@ -27,6 +29,8 @@ import { FilterPipe } from './shared/filter.pipe';
 import { RecommendationsComponent } from './recommendations/recommendations.component';
 import { TimetableService } from './recommendations/timetable.service';
 import { LocalStorageService } from './shared/local-storage.service';
+import { SaveDialogComponent } from './shared/save-dialog/save-dialog.component';
+import { ConfirmSnackBarComponent } from './shared/confirm-snack-bar/confirm-snack-bar.component';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
@@ -46,7 +50,9 @@ export function timetableServiceFactory(provider: TimetableService) {
     ArtistsGridComponent,
     FilterPipe,
     ArtistElementComponent,
-    RecommendationsComponent
+    RecommendationsComponent,
+    SaveDialogComponent,
+    ConfirmSnackBarComponent
   ],
   imports: [
     BrowserModule,
@@ -61,6 +67,8 @@ export function timetableServiceFactory(provider: TimetableService) {
     MatCardModule,
     MatTabsModule,
     MatToolbarModule,
+    MatDialogModule,
+    MatSnackBarModule,
     CalendarModule.forRoot(),
     RouterModule.forRoot(appRoutes)
   ],
@@ -70,7 +78,8 @@ export function timetableServiceFactory(provider: TimetableService) {
     LocalStorageService,
     { provide: APP_INITIALIZER, useFactory: timetableServiceFactory, deps: [TimetableService, HttpClientModule], multi: true }
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [SaveDialogComponent, ConfirmSnackBarComponent]
 })
 
 export class AppModule { }
