@@ -1,7 +1,7 @@
 <div class="app-content app-view-container" [ngClass]="{'center': !loaded}">
   <div *ngIf="!loaded" class="loader"></div>
 
-  <div *ngIf="loaded">
+  <div *ngIf="loaded" class="app-content">
     <div fxLayout="row">
       <div fxFlex="20">
         <button
@@ -12,7 +12,7 @@
         </button>
       </div>
 
-      <div fxFlex="60" fxLayout="column" fxLayoutAlign.gt-xs="center center">
+      <div fxFlex="60" fxLayout="column" fxLayoutAlign="center center">
         <h4>{{days[selectedDayId] | titlecase}}</h4>
         <p class="date">{{ viewDate | date:'d MMMM' }}</p>
       </div>
@@ -27,44 +27,42 @@
     </div>
 
     <div fxLayout="row" class="stages-header">
-      <div fxFlex="25" fxLayoutAlign="center start" class="stage-title" *ngFor="let stageName of getStagesNames()">
+      <div fxFlex="25" fxLayoutAlign="center center" *ngFor="let stageName of getStagesNames()">
         <p> {{stageName}} </p>
       </div>
     </div>
 
-    <div class="scrollable">
-      <div fxLayout="row">
-        <div class="hours-segment">
-          <mwl-calendar-day-view
-            [viewDate]="viewDate"
-            [events]=""
-            [dayStartHour]="15"
-            [dayEndHour]="24">
-          </mwl-calendar-day-view>
-          <mwl-calendar-day-view
-            [viewDate]="nextDate"
-            [events]=""
-            [dayStartHour]="00"
-            [dayEndHour]="3">
-          </mwl-calendar-day-view>
-        </div>
+    <div fxFlex fxLayout="row" class="scrollable">
+      <div class="hours-segment">
+        <mwl-calendar-day-view
+          [viewDate]="viewDate"
+          [events]=""
+          [dayStartHour]="15"
+          [dayEndHour]="24">
+        </mwl-calendar-day-view>
+        <mwl-calendar-day-view
+          [viewDate]="nextDate"
+          [events]=""
+          [dayStartHour]="00"
+          [dayEndHour]="3">
+        </mwl-calendar-day-view>
+      </div>
 
-        <div class="timetable">
-          <div fxLayout="row">
-            <div fxFlex="25" class="timetable" *ngFor="let stageEvents of events">
-              <mwl-calendar-day-view
-                [viewDate]="viewDate"
-                [events]="stageEvents"
-                [dayStartHour]="15"
-                [dayEndHour]="24">
-              </mwl-calendar-day-view>
-              <mwl-calendar-day-view
-                [viewDate]="nextDate"
-                [events]="stageEvents"
-                [dayStartHour]="00"
-                [dayEndHour]="3">
-              </mwl-calendar-day-view>
-            </div>
+      <div class="timetable">
+        <div fxLayout="row">
+          <div fxFlex="25" class="timetable" *ngFor="let stageEvents of events">
+            <mwl-calendar-day-view
+              [viewDate]="viewDate"
+              [events]="stageEvents"
+              [dayStartHour]="15"
+              [dayEndHour]="24">
+            </mwl-calendar-day-view>
+            <mwl-calendar-day-view
+              [viewDate]="nextDate"
+              [events]="stageEvents"
+              [dayStartHour]="00"
+              [dayEndHour]="3">
+            </mwl-calendar-day-view>
           </div>
         </div>
       </div>

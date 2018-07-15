@@ -17,6 +17,8 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatDialogModule } from '@angular/material';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatDividerModule } from '@angular/material/divider';
 import { CalendarModule } from 'angular-calendar';
 
 import { AppComponent } from './app.component';
@@ -69,6 +71,8 @@ export function timetableServiceFactory(provider: TimetableService) {
     MatToolbarModule,
     MatDialogModule,
     MatSnackBarModule,
+    MatMenuModule,
+    MatDividerModule,
     CalendarModule.forRoot(),
     RouterModule.forRoot(appRoutes)
   ],

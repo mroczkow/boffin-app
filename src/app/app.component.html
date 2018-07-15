@@ -5,20 +5,48 @@
       <span class="title"> B<b style="font-size: 26px">OFF</b>IN</span>
     </button>
 
-    <div fxLayout="row">
+    <div fxFlex fxLayout="row" fxHide.xs>
       <button mat-button [routerLink]="['artists']" routerLinkActive="active">Artists</button>
       <button mat-button [routerLink]="['recommendations']" routerLinkActive="active">Recommendations</button>
+
+      <span class="fill-remaining-space"></span>
+
+      <button mat-icon-button (click)="onSaveUserTaste()" [hidden]="isHomePage()">
+        <mat-icon>save</mat-icon>
+      </button>
+
+      <button mat-icon-button (click)="onClearUserTaste()" [hidden]="isHomePage()">
+        <mat-icon>delete_outline</mat-icon>
+      </button>
     </div>
 
-    <span class="fill-remaining-space"></span>
+    <div fxFlex fxLayout="row" fxHide.gt-xs>
+      <span class="fill-remaining-space"></span>
 
-    <button mat-icon-button (click)="onSaveUserTaste()" [hidden]="isHomePage()">
-      <mat-icon>save_outline</mat-icon>
-    </button>
+      <button mat-icon-button [matMenuTriggerFor]="menu">
+      <mat-icon>menu</mat-icon>
+      </button>
 
-    <button mat-icon-button (click)="onClearUserTaste()" [hidden]="isHomePage()">
-      <mat-icon>delete_outline</mat-icon>
-    </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item [routerLink]="['artists']">Artists</button>
+
+        <button mat-menu-item [routerLink]="['recommendations']">Recommendations</button>
+
+        <div [hidden]="isHomePage()">
+          <mat-divider ></mat-divider>
+
+          <button mat-menu-item (click)="onSaveUserTaste()" [hidden]="isHomePage()">
+            <mat-icon>save</mat-icon>
+            <span>Save</span>
+          </button>
+
+          <button mat-menu-item (click)="onClearUserTaste()" [hidden]="isHomePage()">
+            <mat-icon>delete_outline</mat-icon>
+            <span>Clear</span>
+          </button>
+        </div>
+      </mat-menu>
+    </div>
   </mat-toolbar>
 
   <div class="app-content content-center">
