@@ -26,6 +26,7 @@ import { ArtistsService } from './artists-picker/artists.service';
 import { FilterPipe } from './shared/filter.pipe';
 import { RecommendationsComponent } from './recommendations/recommendations.component';
 import { TimetableService } from './recommendations/timetable.service';
+import { LocalStorageService } from './shared/local-storage.service';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
@@ -66,6 +67,7 @@ export function timetableServiceFactory(provider: TimetableService) {
   providers: [
     ArtistsService,
     TimetableService,
+    LocalStorageService,
     { provide: APP_INITIALIZER, useFactory: timetableServiceFactory, deps: [TimetableService, HttpClientModule], multi: true }
   ],
   bootstrap: [AppComponent]

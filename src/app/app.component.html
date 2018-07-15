@@ -11,7 +11,15 @@
     </div>
 
     <!-- This fills the remaining space of the current row -->
-    <!--<span class="fill-remaining-space"></span>-->
+    <span class="fill-remaining-space"></span>
+
+    <button mat-icon-button (click)="onSaveUserTaste()">
+      <mat-icon>save_outline</mat-icon>
+    </button>
+
+    <button mat-icon-button (click)="onClearUserTaste()">
+      <mat-icon>delete_outline</mat-icon>
+    </button>
   </mat-toolbar>
 
   <div class="app-content content-center">

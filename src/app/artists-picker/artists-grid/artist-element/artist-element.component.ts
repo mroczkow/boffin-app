@@ -92,6 +92,12 @@ export class ArtistElementComponent implements OnInit {
       this.fullHeartState = 'selected';
       this.emptyHeartState = 'not-visible';
     }
+
+    this.artistsService.selectedArtistsUpdated.subscribe(() => {
+      this.isSelected = this.artistsService.isSelected(this.artist.name);
+      this.fullHeartState = 'not-visible';
+      this.emptyHeartState = 'not-visible';
+    });
   }
 
   onArtistSelected() {

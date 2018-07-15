@@ -4,14 +4,19 @@ import { map } from 'rxjs/operators';
 import { Observable, Subject } from 'rxjs/index';
 
 import { Artist } from './artist';
+import {LocalStorageService} from '../shared/local-storage.service';
 
 @Injectable()
 export class ArtistsService {
   recommendationsReady = new Subject<{[artistName: string]: number}>();
+  selectedArtistsUpdated = new Subject<string[]>();
 
-  private selectedArtists: string[] = [];
+  private selectedArtists: string[];
+  private recommendation: {[artistName: string]: number};
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private localStorageService: LocalStorageService) {
+    this.updateStoredDate();
+  }
 
   getHistoricData(): Observable<Object> {
     return this.http.get('assets/artists.json').pipe(
@@ -43,16 +48,37 @@ export class ArtistsService {
     return this.selectedArtists;
   }
 
+  getRecommendation(): {[artistName: string]: number} {
+    return this.recommendation;
+  }
+
   send() {
     const chosenArtists = {'chosenArtists': this.selectedArtists};
     const httpOptions = {headers: new HttpHeaders({'Content-Type':  'application/json'})};
 
-    localStorage.setItem('recommendation', null);
+    // this.localStorageService.removeFromLocalStorage('recommendation');  // todo co z tym????
 
     this.http.post('https://boffin-api.herokuapp.com/api/recommend', chosenArtists, httpOptions).subscribe(response => {
-      this.recommendationsReady.next(response['recommendation']);
-      localStorage.setItem('recommendation', JSON.stringify(response['recommendation']));
+      this.recommendation = response['recommendation'];
+      this.recommendationsReady.next(this.recommendation);
+      // localStorage.setItem('recommendation', JSON.stringify(response['recommendation']));
     });
+  }
+
+  saveInLocalStorage() {
+    this.localStorageService.saveToLocalStorage('selectedArtists', this.selectedArtists);
+    this.localStorageService.saveToLocalStorage('recommendation', this.recommendation);
+  }
+
+  updateStoredDate() {
+    const storedArtists = this.localStorageService.getFromLocalStorage('selectedArtists');
+    const storedRecommendation = this.localStorageService.getFromLocalStorage('recommendation');
+
+    this.selectedArtists = storedArtists ? storedArtists : [];
+    this.recommendation = storedRecommendation ? storedRecommendation : {};
+
+    this.selectedArtistsUpdated.next(this.selectedArtists);
+    this.recommendationsReady.next(this.recommendation);
   }
 
   private getAllArtists(data): Artist[] {

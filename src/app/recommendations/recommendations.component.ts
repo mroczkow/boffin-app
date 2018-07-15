@@ -27,7 +27,7 @@ export class RecommendationsComponent implements OnInit, OnDestroy {
     this.days = this.timetableService.getDays();
     this.viewDate = this.timetableService.getViewDate(this.selectedDayId);
     this.nextDate = this.getNextDate(this.viewDate);
-    this.recommendations = JSON.parse(localStorage.getItem('recommendation'));
+    this.recommendations = this.artistsService.getRecommendation();
     this.events = this.timetableService.getEventsList(this.selectedDayId, this.recommendations);
 
     this.subscription = this.artistsService.recommendationsReady.subscribe(data => {
