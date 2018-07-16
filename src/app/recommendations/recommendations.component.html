@@ -26,13 +26,13 @@
       </div>
     </div>
 
-    <div fxLayout="row" class="stages-header">
+    <div fxLayout="row" class="stages-header" fxHide.xs>
       <div fxFlex="25" fxLayoutAlign="center center" *ngFor="let stageName of getStagesNames()">
         <p> {{stageName}} </p>
       </div>
     </div>
 
-    <div fxFlex fxLayout="row" class="scrollable">
+    <div fxFlex fxLayout="row" class="scrollable" fxHide.xs>
       <div class="hours-segment">
         <mwl-calendar-day-view
           [viewDate]="viewDate"
@@ -66,6 +66,22 @@
           </div>
         </div>
       </div>
+    </div>
+
+    <div fxFlex fxLayout="row" class="scrollable" fxHide.gt-xs>
+      <mat-list fxFlex>
+        <div *ngFor="let stageName of getStagesNames(); let i = index">
+          <p mat-subheader class="list-header">{{stageName}}</p>
+          <mat-list-item
+            *ngFor="let event of events[i]"
+            class="list-element"
+            [ngStyle]="{'background-color': event.color.secondary}">
+              <span fxFlex="40" class="list-hour">{{event.start | date:'HH:mm'}} - {{event.end | date:'HH:mm'}}</span>
+              <span fxFlex="60" class="list-title">{{event.title}}</span>
+          </mat-list-item>
+          <br>
+        </div>
+      </mat-list>
     </div>
   </div>
 </div>
