@@ -25,7 +25,7 @@
     </div>
   </div>
 
-  <mat-tab-group (selectedIndexChange)="onTabSelected($event)" *ngIf="loaded">
+  <mat-tab-group (selectedIndexChange)="onTabSelected($event)" *ngIf="loaded" ngClass.xs="xs-app-tab-group">
     <mat-tab *ngFor="let year of years" label={{year}}>
     </mat-tab>
   </mat-tab-group>

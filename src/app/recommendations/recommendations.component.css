@@ -24,6 +24,10 @@
   margin-right: 1px;
 }
 
+.stages-header p {
+  margin-bottom: 5px;
+}
+
 .timetable {
   padding: 0 !important;
   color: transparent;
@@ -36,7 +40,7 @@
   display: block !important;
 }
 .list-element {
-  border-bottom: thin solid #e1e1e1;
+  border-bottom: thin solid white;
   padding-top: 10px;
   padding-bottom: 10px;
   height: auto !important;

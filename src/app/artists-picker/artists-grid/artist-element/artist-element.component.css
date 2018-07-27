@@ -11,6 +11,7 @@
   box-shadow: none !important;
   padding-bottom: 5px !important;
 }
+
 .app-artist-element:hover {
   box-shadow: 0 0 1em lightgrey !important;
   cursor: pointer;
@@ -40,6 +41,10 @@
   background-color: #ffffff;
 }
 
+.xs-img-conatiner {
+  margin-bottom: 5px;
+}
+
 .mat-card-title {
   font-size: 20px;
 }
@@ -53,7 +58,24 @@
   padding-right: 2px;
 }
 
-.smaller-margin {
+.xs-app-card-content {
+  margin-bottom: 0 !important;
+}
+
+.app-card-content {
+  margin-bottom: 16px !important;
+}
+
+.app-card-title {
   margin-left: -10px;
   margin-right: -10px;
+}
+
+.xs-app-card-title {
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+
+.app-tags {
+  margin-bottom: 16px !important;
 }

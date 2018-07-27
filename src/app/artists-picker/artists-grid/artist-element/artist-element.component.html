@@ -4,7 +4,7 @@
           (mouseenter)="onMouseEnter()"
           (mouseleave)="onMouseLeave()">
 
-  <div class="img-container" mat-card-image>
+  <div class="img-container" ngClass.xs="xs-img-conatiner" mat-card-image>
     <img class="card-img-top lazy"
          src="../../../assets/img_placeholder.png"
          onError="this.onerror = null; this.src = '../../../assets/img_error.png';"
@@ -15,11 +15,11 @@
   </div>
 
   <mat-card-content>
-    <mat-card-title class="smaller-margin">
+    <mat-card-title class="app-card-title" ngClass.xs="xs-app-card-title">
       {{ artist.name }}
     </mat-card-title>
 
-    <div fxLayout="row wrap" *ngIf="showTags" class="smaller-margin">
+    <div fxLayout="row wrap" *ngIf="showTags" ngClass.gt-xs="app-tags">
       <div class="app-tag-item" *ngFor="let tag of artist.tags">
         <p class="card-text tag-text">{{tag}}</p>
       </div>

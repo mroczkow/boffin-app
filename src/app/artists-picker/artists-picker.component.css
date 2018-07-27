@@ -23,6 +23,10 @@
   width: 100%;
 }
 
+.xs-app-tab-group /deep/.mat-tab-label {
+  height: 30px;
+}
+
 /deep/.mat-tab-label, /deep/.mat-tab-label-active {
         min-width: 80px !important;
         padding: 3px!important;

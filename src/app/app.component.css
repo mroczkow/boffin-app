@@ -27,3 +27,7 @@
 .fill-remaining-space {
   flex: 1 1 auto;
 }
+
+.nav-button /deep/ .mat-button-focus-overlay {
+  background-color:transparent;
+}
