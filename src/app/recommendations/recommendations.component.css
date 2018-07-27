@@ -33,6 +33,7 @@
 .hours-segment {
   width: 105px;
   color: rgba(0, 0, 0, 0.5);
+  display: block !important;
 }
 .list-element {
   border-bottom: thin solid #e1e1e1;
