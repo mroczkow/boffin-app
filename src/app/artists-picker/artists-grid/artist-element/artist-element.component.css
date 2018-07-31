@@ -79,3 +79,7 @@
 .app-tags {
   margin-bottom: 16px !important;
 }
+
+.xs-app-tags {
+  margin-bottom: 0 !important;
+}

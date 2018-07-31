@@ -19,7 +19,7 @@
       {{ artist.name }}
     </mat-card-title>
 
-    <div fxLayout="row wrap" *ngIf="showTags" ngClass.gt-xs="app-tags">
+    <div fxLayout="row wrap" *ngIf="showTags" class="app-tags" ngClass.xs="xs-app-tags">
       <div class="app-tag-item" *ngFor="let tag of artist.tags">
         <p class="card-text tag-text">{{tag}}</p>
       </div>
