@@ -1,0 +1,14 @@
+<h2 mat-dialog-title>{{data.title}}</h2>
+
+<mat-dialog-content>
+    {{data.description}}
+</mat-dialog-content>
+
+<br>
+
+<mat-dialog-actions>
+    <div fxLayout="row" fxFlex>
+        <button fxFlex="47.5" mat-button (click)="close(false)">No, thanks</button>
+        <button fxFlex="47.5" fxFlexOffset="5" mat-raised-button color="primary" (click)="close(true)">Ok</button>
+    </div>
+</mat-dialog-actions>

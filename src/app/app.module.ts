@@ -34,6 +34,7 @@ import { TimetableService } from './recommendations/timetable.service';
 import { LocalStorageService } from './shared/local-storage.service';
 import { SaveDialogComponent } from './shared/save-dialog/save-dialog.component';
 import { LegendDialogComponent } from './shared/legend-dialog/legend-dialog.component'
+import { ConfirmDialogComponent } from './shared/confirm-dialog/confirm-dialog.component'
 import { ConfirmSnackBarComponent } from './shared/confirm-snack-bar/confirm-snack-bar.component';
 
 const appRoutes: Routes = [
@@ -57,7 +58,8 @@ export function timetableServiceFactory(provider: TimetableService) {
     RecommendationsComponent,
     SaveDialogComponent,
     LegendDialogComponent,
-    ConfirmSnackBarComponent
+    ConfirmSnackBarComponent,
+    ConfirmDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -87,7 +89,7 @@ export function timetableServiceFactory(provider: TimetableService) {
     { provide: APP_INITIALIZER, useFactory: timetableServiceFactory, deps: [TimetableService, HttpClientModule], multi: true }
   ],
   bootstrap: [AppComponent],
-  entryComponents: [SaveDialogComponent, ConfirmSnackBarComponent, LegendDialogComponent]
+  entryComponents: [SaveDialogComponent, ConfirmDialogComponent, ConfirmSnackBarComponent, LegendDialogComponent]
 })
 
 export class AppModule { }

@@ -6,6 +6,7 @@ import { ArtistsService } from './artists-picker/artists.service';
 import { LocalStorageService } from './shared/local-storage.service';
 import { ConfirmSnackBarComponent } from './shared/confirm-snack-bar/confirm-snack-bar.component';
 import { LegendDialogComponent } from './shared/legend-dialog/legend-dialog.component';
+import { ConfirmDialogComponent } from './shared/confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-root',
@@ -22,13 +23,27 @@ export class AppComponent {
   }
 
   onClearUserTaste() {
-    this.localStorageService.clearLocalStorage();
-    this.artistService.updateStoredDate();
-    this.showConfirmation('Done!');
+    const dialogData = {
+      title: 'Would you like to clear your choice?',
+      description: 'Selected artists and your recommendation will be deleted from this device.'
+    };
+
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      data: dialogData
+    });
+
+    dialogRef.afterClosed().subscribe(data => {
+      if(data) {
+        this.localStorageService.clearLocalStorage();
+        this.artistService.updateStoredDate();
+        this.showConfirmation('Done!');
+      } else {
+        this.showConfirmation('Canceled');
+      }
+    });
   }
 
   onShowLegend() {
-    // const dialogConfig = new MatDialogConfig();
     this.dialog.open(LegendDialogComponent);
   }
 
