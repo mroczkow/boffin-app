@@ -73,13 +73,11 @@ export class ArtistsPickerComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(data => {
-      if(data) {
+      if (data) {
         this.artistsService.saveInLocalStorage();
       }
-      
+
       this.router.navigate(['recommendations']);
     });
-
-    
   }
 }

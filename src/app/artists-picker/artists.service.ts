@@ -56,12 +56,9 @@ export class ArtistsService {
     const chosenArtists = {'chosenArtists': this.selectedArtists};
     const httpOptions = {headers: new HttpHeaders({'Content-Type':  'application/json'})};
 
-    // this.localStorageService.removeFromLocalStorage('recommendation');  // todo co z tym????
-
     this.http.post('https://boffin-api.herokuapp.com/api/recommend', chosenArtists, httpOptions).subscribe(response => {
       this.recommendation = response['recommendation'];
       this.recommendationsReady.next(this.recommendation);
-      // localStorage.setItem('recommendation', JSON.stringify(response['recommendation']));
     });
   }
 
