@@ -1,6 +1,6 @@
 <div class="app-content">
   <div fxFlex fxLayoutAlign="center center">
-    <div fxLayout="column" fxLayoutAlign="center center" >
+    <div fxLayout="column" fxLayoutAlign="center center" class="home-content">
       <h3>Meet Boffin, your OFF Festival guide</h3>
       <br>
       <p>He is a mad scientist and music freak, who will help you choose artists you should definitely see this year!</p>
@@ -9,6 +9,11 @@
 
       <button mat-raised-button color="primary" [routerLink]="['artists']" role="button">Start</button>
     </div>
+  </div>
+  <div fxLayoutAlign="end">
+    <button mat-button class="nav-button off-logo" (click)="onShowOffPage()">
+      <img src="../assets/off_logo.svg" height="70px" width="auto" ngClass.xs="xs-off-logo-img">
+    </button>
   </div>
 </div>
 

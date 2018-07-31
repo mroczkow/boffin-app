@@ -91,3 +91,7 @@ button {
   text-decoration: none;
   cursor: default;
 }
+
+.nav-button /deep/ .mat-button-focus-overlay {
+  background-color:transparent;
+}
