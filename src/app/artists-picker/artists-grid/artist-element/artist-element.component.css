@@ -12,16 +12,16 @@
   padding-bottom: 5px !important;
 }
 
-.app-artist-element:hover {
+.not-mobile:hover {
   box-shadow: 0 0 1em lightgrey !important;
   cursor: pointer;
 }
 
-.app-artist-element:hover img, .selected img{
+.not-mobile:hover img, .selected img{
   opacity: 0.5;
 }
 
-.app-artist-element:hover .img-container, .selected .img-container {
+.not-mobile:hover .img-container, .selected .img-container {
   background-color: #000000;
 }
 

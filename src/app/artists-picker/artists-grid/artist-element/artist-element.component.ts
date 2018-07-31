@@ -107,6 +107,10 @@ export class ArtistElementComponent implements OnInit, OnDestroy {
       this.artistsService.removeArtistFromSelected(this.artist.name);
       this.fullHeartState = 'not-visible';
       this.emptyHeartState = 'unselected';
+
+      if (this.isMobile) {
+        this.emptyHeartState = 'not-visible';
+      }
     } else {
       this.artistsService.addArtistNameToSelected(this.artist.name);
       this.fullHeartState = 'selected';
@@ -116,13 +120,15 @@ export class ArtistElementComponent implements OnInit, OnDestroy {
   }
 
   onMouseEnter() {
-    if (this.isSelected) {
-      this.fullHeartState = 'hover-selected';
-      this.emptyHeartState = 'hover-selected';
-    } else {
-      this.emptyHeartState = 'visible';
-      this.fullHeartState = 'not-visible';
-    }
+   if (!this.isMobile) {
+     if (this.isSelected) {
+       this.fullHeartState = 'hover-selected';
+       this.emptyHeartState = 'hover-selected';
+     } else {
+       this.emptyHeartState = 'visible';
+       this.fullHeartState = 'not-visible';
+     }
+   }
   }
 
   onMouseLeave() {

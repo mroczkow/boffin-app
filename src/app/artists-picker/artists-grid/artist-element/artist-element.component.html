@@ -1,5 +1,5 @@
 <mat-card class="card app-artist-element"
-          [ngClass]="{'selected': isSelected}"
+          [ngClass]="{'selected': isSelected, 'not-mobile': !isMobile}"
           (click)="onArtistSelected()"
           (mouseenter)="onMouseEnter()"
           (mouseleave)="onMouseLeave()">
