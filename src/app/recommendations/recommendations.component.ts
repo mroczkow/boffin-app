@@ -1,6 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs/index';
 
+import { CalendarEventTitleFormatter } from 'angular-calendar';
+import { RecommendationsCalendarEventTitleFormatter } from './recommendations-calendar-event-title-formatter.provider';
 import { ArtistsService } from '../artists-picker/artists.service';
 import { TimetableService } from './timetable.service';
 import { TimetableEvent } from './timetable-event';
@@ -8,7 +10,13 @@ import { TimetableEvent } from './timetable-event';
 @Component({
   selector: 'app-recommendations',
   templateUrl: './recommendations.component.html',
-  styleUrls: ['./recommendations.component.css']
+  styleUrls: ['./recommendations.component.css'],
+  providers: [
+    {
+      provide: CalendarEventTitleFormatter,
+      useClass: RecommendationsCalendarEventTitleFormatter
+    }
+  ]
 })
 export class RecommendationsComponent implements OnInit, OnDestroy {
   private subscription: Subscription;
