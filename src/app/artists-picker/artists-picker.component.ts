@@ -1,10 +1,10 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { MatDialog, MatDialogConfig } from '@angular/material';
+import { MatDialog } from '@angular/material';
 
 import { ArtistsService } from './artists.service';
 import { Artist } from './artist';
-import { SaveDialogComponent } from '../shared/save-dialog/save-dialog.component';
+import { ConfirmDialogComponent } from '../shared/confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-artists-picker',
@@ -23,7 +23,7 @@ export class ArtistsPickerComponent implements OnInit {
   loaded = false;
   showSelected = false;
 
-  constructor(private artistsService: ArtistsService, private dialog: MatDialog) { }
+  constructor(private artistsService: ArtistsService, private dialog: MatDialog, private router: Router) { }
 
   ngOnInit() {
     this.artistsService.getHistoricData().subscribe(data => {
@@ -63,9 +63,23 @@ export class ArtistsPickerComponent implements OnInit {
   }
 
   private openDialog() {
-    const dialogConfig = new MatDialogConfig();
-    dialogConfig.disableClose = true;
+    const dialogData = {
+      title: 'Would you like to save your choice?',
+      description: 'Selected artists and your recommendation will be saved on this device.'
+    };
 
-    this.dialog.open(SaveDialogComponent, dialogConfig);
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      data: dialogData
+    });
+
+    dialogRef.afterClosed().subscribe(data => {
+      if(data) {
+        this.artistsService.saveInLocalStorage();
+      }
+      
+      this.router.navigate(['recommendations']);
+    });
+
+    
   }
 }

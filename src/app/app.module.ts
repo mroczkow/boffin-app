@@ -32,7 +32,6 @@ import { FilterPipe } from './shared/filter.pipe';
 import { RecommendationsComponent } from './recommendations/recommendations.component';
 import { TimetableService } from './recommendations/timetable.service';
 import { LocalStorageService } from './shared/local-storage.service';
-import { SaveDialogComponent } from './shared/save-dialog/save-dialog.component';
 import { LegendDialogComponent } from './shared/legend-dialog/legend-dialog.component'
 import { ConfirmDialogComponent } from './shared/confirm-dialog/confirm-dialog.component'
 import { ConfirmSnackBarComponent } from './shared/confirm-snack-bar/confirm-snack-bar.component';
@@ -56,7 +55,6 @@ export function timetableServiceFactory(provider: TimetableService) {
     FilterPipe,
     ArtistElementComponent,
     RecommendationsComponent,
-    SaveDialogComponent,
     LegendDialogComponent,
     ConfirmSnackBarComponent,
     ConfirmDialogComponent
@@ -89,7 +87,7 @@ export function timetableServiceFactory(provider: TimetableService) {
     { provide: APP_INITIALIZER, useFactory: timetableServiceFactory, deps: [TimetableService, HttpClientModule], multi: true }
   ],
   bootstrap: [AppComponent],
-  entryComponents: [SaveDialogComponent, ConfirmDialogComponent, ConfirmSnackBarComponent, LegendDialogComponent]
+  entryComponents: [ConfirmDialogComponent, ConfirmSnackBarComponent, LegendDialogComponent]
 })
 
 export class AppModule { }
