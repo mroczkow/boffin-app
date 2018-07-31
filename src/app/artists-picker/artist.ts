@@ -1,11 +1,11 @@
 export class Artist {
   name: string;
-  imagePath: string;
+  imageFileName: string;
   tags: string[];
 
-  constructor(name: string, imagePath: string, tags: string[]) {
+  constructor(name: string, imageFileName: string, tags: string[]) {
     this.name = name;
-    this.imagePath = imagePath;
+    this.imageFileName = imageFileName;
     this.tags = tags;
   }
 }
